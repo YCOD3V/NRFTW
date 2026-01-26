@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>No Rest for the Wicked | Comunidad en Español</title>
+  <meta name="description" content="Comunidad hispanohablante de No Rest for the Wicked. Únete a nuestro Discord para compartir, aprender y jugar en español." />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#0a070f" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #ffd700;
+      --primary-dim: #b8860b;
+      --bg-dark: #0a070f;
+      --card-bg: rgba(20, 15, 25, 0.8);
+      --text-main: #e0e0e0;
+      --accent-red: #8b0000;
+      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    /* Estética General AAA */
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Space+Grotesk', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    .bg-texture {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,0,0,0.9) 100%),
+        url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Header Estilo Overlay */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+      position: fixed;
+      width: 90%;
+      z-index: 100;
+      backdrop-filter: blur(5px);
+    }
+
+    .nav__cta {
+      background: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      padding: 0.6rem 1.2rem;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      transition: var(--transition);
+    }
+
+    .nav__cta:hover {
+      background: var(--primary);
+      color: black;
+      box-shadow: 0 0 15px var(--primary);
+    }
+
+    /* Hero Section Cinematográfica */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 20px 60px;
+      text-align: center;
+    }
+
+    .hero__title {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: -2px;
+      background: linear-gradient(to bottom, #fff 30%, #555 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 20px rgba(255,255,255,0.1));
+    }
+
+    .hero__identity {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-top: -10px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+    }
+
+    /* Tarjetas de Contenido */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 40px 5%;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.05);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+      cursor: default;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(255, 215, 0, 0.3);
+      background: rgba(30, 25, 35, 0.9);
+    }
+
+    .card:hover::before {
+      transform: translateX(100%);
+    }
+
+    .card__value {
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    /* Botón Principal Estilo Juego */
+    .btn.primary {
+      display: inline-block;
+      padding: 1.2rem 2.5rem;
+      background: var(--primary);
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+      text-transform: uppercase;
+      clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+      transition: var(--transition);
+      margin-top: 2rem;
+    }
+
+    .btn.primary:hover {
+      transform: scale(1.05);
+      filter: brightness(1.2);
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+    }
+
+    /* Status Dot */
+    .pulse-dot {
+      height: 10px; width: 10px;
+      background-color: #43b581;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 8px;
+      box-shadow: 0 0 8px #43b581;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.7; }
+      70% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.7; }
+    }
+
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+    .glitch {
+      position: relative;
+      display: inline-block;
+      color: var(--primary);
+      text-shadow: 0 0 18px #ffd70099;
+    }
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      overflow: hidden;
+      clip: rect(0, 900px, 0, 0);
+    }
+    .glitch::before {
+      left: 2px;
+      text-shadow: -2px 0 #ffd70099;
+      animation: glitch 2s infinite linear alternate-reverse;
+    }
+    .glitch::after {
+      left: -2px;
+      text-shadow: -2px 0 #222;
+      animation: glitch 2s infinite linear alternate;
+    }
+    @keyframes glitch {
+      0% { clip: rect(6px, 9999px, 44px, 0); }
+      20% { clip: rect(40px, 9999px, 14px, 0); }
+      40% { clip: rect(18px, 9999px, 60px, 0); }
+      60% { clip: rect(50px, 9999px, 24px, 0); }
+      80% { clip: rect(28px, 9999px, 80px, 0); }
+      100% { clip: rect(10px, 9999px, 40px, 0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-texture"></div>
+
+  <img src="img/fotos/2.jpg" alt="Fondo difuminado" style="position:fixed;left:0;right:0;bottom:0;width:100vw;height:600px;z-index:-20;pointer-events:none;object-fit:cover;filter:blur(3px) brightness(0.95);opacity:0.6;" />
+
+  <header class="topbar">
+    <div class="brand">
+        <img class="brand__logo" src="img/no-rest-for-the-wicked-logo-horizontal-clean.png" alt="Logo" style="height:40px;" />
+    </div>
+    <nav class="nav">
+      <a class="nav__cta" href="http://discord.gg/r6sJjNFy9s" target="_blank">Discord Oficial de la Comunidad</a>
+    </nav>
+  </header>
+
+  <main id="contenido-principal">
+    <section class="hero" id="unete">
+      <div data-aos="zoom-out" data-aos-duration="1500">
+        <img src="img/no-rest-for-the-wicked-logo-clean.png" alt="Cerim Icon" style="max-width:180px; margin-bottom: 2rem; filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));" />
+      </div>
+      
+      <p class="eyebrow" data-aos="fade-up" style="letter-spacing: 8px; color: var(--primary); font-weight: bold;"><span class="glitch" data-text="COMUNIDAD HISPANA [ESPAÑA Y LATINOAMÉRICA]">COMUNIDAD HISPANA [ESPAÑA Y LATINOAMÉRICA]</span></p>
+      <h1 class="hero__title" data-aos="fade-up" data-aos-delay="200">No Rest for the Wicked</h1>
+      <p class="hero__identity" data-aos="fade-up" data-aos-delay="400">Explora junto a nosotros el corazón de la isla: Isola Sacra</p>
+      
+      <p class="lede" style="max-width: 600px; margin: 2rem auto; color: #aaa;" data-aos="fade-up" data-aos-delay="600">
+La Pestilencia consume Isola Sacra, pero la llama de los Cerim no se apaga. Nos alzamos contra la oscuridad que corrompe la tierra. Únete a la vanguardia de la comunidad hispana: perfecciona tus builds, domina cada rincón del mapa y sobrevive al combate más visceral en modo cooperativo. El Reino está en ruinas, pero un Cerim no reclama... purifica. ¿Estás listo?
+      <div data-aos="fade-up" data-aos-delay="800">
+        <a class="btn primary" href="http://discord.gg/r6sJjNFy9s" target="_blank">Unirse al Servidor</a>
+      </div>
+    </section>
+
+    <section class="section" style="padding: 100px 0;">
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <h2 style="text-transform: uppercase; letter-spacing: 3px;" data-aos="fade-right">Explora junto a nosotros:</h2>
+        <div style="width: 50px; height: 2px; background: var(--primary); margin: 10px auto;"></div>
+      </div>
+
+      <div class="grid">
+        <div class="card" data-aos="fade-up" data-aos-delay="100">
+          <div class="card__value"><span class="icon-announcements" style="vertical-align:middle;margin-right:8px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 8v4a7 7 0 0 0 7 7v0a7 7 0 0 0 7-7V8" stroke="#ffd700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 2v2" stroke="#ffd700" stroke-width="2" stroke-linecap="round"/><circle cx="10" cy="6" r="2" fill="#ffd700"/></svg></span>ANUNCIOS</div>
+          <p>Noticias oficiales del juego, la comunidad y actualizaciones del servidor de discord.</p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="200">
+          <div class="card__value"><span class="icon-chat" style="vertical-align:middle;margin-right:8px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 16v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" stroke="#ffd700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="7" r="3" fill="#ffd700"/></svg></span>PLAZA DE SACRAMENTO</div>
+          <p>El punto de encuentro social para todos los Cerims.</p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="300">
+          <div class="card__value"><span class="icon-coop" style="vertical-align:middle;margin-right:8px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="6" cy="8" r="3" fill="#ffd700"/><circle cx="14" cy="8" r="3" fill="#ffd700"/><path d="M2 16v-2a4 4 0 0 1 4-4h0a4 4 0 0 1 4 4v2" stroke="#ffd700" stroke-width="2" stroke-linecap="round"/><path d="M10 16v-2a4 4 0 0 1 4-4h0a4 4 0 0 1 4 4v2" stroke="#ffd700" stroke-width="2" stroke-linecap="round"/></svg></span>COOPERATIVO</div>
+          <p>Encuentra grupo para mazmorras y bosses difíciles.</p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="400">
+          <div class="card__value"><span class="icon-academy" style="vertical-align:middle;margin-right:8px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="5" width="14" height="10" rx="2" stroke="#ffd700" stroke-width="2"/><path d="M7 5V3a3 3 0 0 1 6 0v2" stroke="#ffd700" stroke-width="2"/></svg></span>ACADEMIA</div>
+          <p>Builds optimizadas y secretos de Isola Sacra.</p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="500">
+          <div class="card__value"><span class="icon-trade" style="vertical-align:middle;margin-right:8px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="7" width="14" height="6" rx="2" stroke="#ffd700" stroke-width="2"/><path d="M7 7V5a3 3 0 0 1 6 0v2" stroke="#ffd700" stroke-width="2"/></svg></span>INTERCAMBIO</div>
+          <p>Intercambia objetos, materiales y equipo con otros jugadores.</p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="600">
+          <div class="card__value"><span class="icon-rank" style="vertical-align:middle;margin-right:8px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="4" y="4" width="12" height="12" rx="2" stroke="#ffd700" stroke-width="2"/><path d="M10 8v4" stroke="#ffd700" stroke-width="2"/><circle cx="10" cy="6" r="1" fill="#ffd700"/></svg></span>RANGOS Y ESTRUCTURA</div>
+          <p>Estructura actual de rangos de la comunidad No Rest for the Wicked. Úsalo como referencia y, si lo deseas, puedes solicitar alguno de los rangos disponibles.</p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="700">
+          <div class="card__value"><span class="icon-events" style="vertical-align:middle;margin-right:8px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="7" width="14" height="8" rx="2" stroke="#ffd700" stroke-width="2"/><path d="M7 7V5a3 3 0 0 1 6 0v2" stroke="#ffd700" stroke-width="2"/></svg></span>TEORÍAS Y SPOILERS</div>
+          <p>Para hablar de la historia, la Pestilencia y el Rey Magnus sin arruinar la experiencia a otros.</p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="800">
+          <div class="card__value"><span class="icon-experience" style="vertical-align:middle;margin-right:8px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="#ffd700" stroke-width="2"/><path d="M10 6v4l3 2" stroke="#ffd700" stroke-width="2" stroke-linecap="round"/></svg></span>COMPARTE TU EXPERIENCIA</div>
+          <p>Sube tus clips, capturas, builds y logros en los canales de la comunidad.</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="background: rgba(0,0,0,0.4); padding: 60px 5%; border-top: 1px solid rgba(255,255,255,0.05);">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 30px;">
+            <div data-aos="fade-right">
+                <span class="pulse-dot"></span> 
+                <span style="font-weight: bold; text-transform: uppercase;">Estado: Comunidad Activa</span>
+            </div>
+            <div style="display: flex; gap: 20px;" data-aos="fade-left">
+              <a class="interest-link" href="https://store.steampowered.com/app/1371980/No_Rest_for_the_Wicked/">Steam</a>
+              <a class="interest-link" href="https://norestforthewicked.com/">Web Oficial</a>
+              <a class="interest-link" href="https://forum.norestforthewicked.com/latest">Foro</a>
+            </div>
+        </div>
+    </section>
+  </main>
+
+  <footer style="padding: 4rem 5%; text-align: center; font-size: 0.8rem; color: #555;">
+    <p>© 2026 Comunidad hispanohablante de No Rest for the Wicked. No afiliado oficialmente con Moon Studios. </p>
+        <p>Las imágenes y recursos visuales pertenecen a Moon Studios, Private Division y sus respectivos propietarios. Uso comunitario y sin fines de lucro.</p>
+
+  </footer>
+
+  <style>
+    .interest-link {
+      color: #aaa;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.18s;
+      padding: 0 10px;
+    }
+    .interest-link:hover, .interest-link:focus, .interest-link:active {
+      color: #ffd700;
+    }
+  </style>
+
+  <style>
+    .footer-bg {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      width: 100vw;
+      height: 600px;
+      z-index: -10;
+      pointer-events: none;
+      background: url('img/fotos/2.jpg') center bottom no-repeat;
+      background-size: cover;
+      opacity: 0.6;
+      filter: blur(8px) brightness(0.9);
+    }
+  </style>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Inicializar animaciones cinemáticas
+    AOS.init({
+      offset: 120,
+      duration: 1000,
+      easing: 'ease-out-back',
+      once: true
+    });
+
+    // Efecto sutil de movimiento en el fondo al mover el mouse
+    document.addEventListener('mousemove', (e) => {
+        const moveX = (e.clientX - window.innerWidth / 2) * 0.005;
+        const moveY = (e.clientY - window.innerHeight / 2) * 0.005;
+        document.querySelector('.bg-texture').style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
+    });
+  </script>
+</body>
+</html>
