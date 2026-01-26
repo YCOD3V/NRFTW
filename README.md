@@ -1,3 +1,3 @@
-## Nocturnia 
+## No Rest for the Wicked 
 
-Sitio para la comunidad Nocturnia de V Rising.
+Sitio para la comunidad No Rest for the Wicked.
